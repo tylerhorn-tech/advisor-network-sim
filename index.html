@@ -63,10 +63,24 @@
     .hotspot {
       position: absolute;
       cursor: pointer;
-      /* visible during dev — remove border/bg for production */
-      /* border: 2px dashed rgba(139,143,245,.5); */
+      border-radius: 12px;
     }
-    .hotspot:active { opacity: .7; }
+    .hotspot:active { opacity: .6; }
+
+    /* Pulsing ring to show where to tap */
+    .hotspot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 0 3px rgba(139,143,245,.7);
+      animation: pulse 1.8s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0px rgba(139,143,245,.8); }
+      70%  { box-shadow: 0 0 0 8px rgba(139,143,245,0); }
+      100% { box-shadow: 0 0 0 0px rgba(139,143,245,0); }
+    }
 
     /* ── Tooltip hint ── */
     .hint {
@@ -112,7 +126,7 @@
       // "+" button is top-right area. Screenshot is 390×844 logical.
       // "+" is roughly at right 8%, top 7%, about 9%w × 5%h
       hotspots: [
-        { top: '5%', left: '82%', width: '14%', height: '8%', target: 's2', title: 'Tap + to add account' }
+        { top: '13%', left: '78%', width: '18%', height: '12%', target: 's2', title: 'Tap + to add account' }
       ]
     },
     {
